@@ -21,8 +21,8 @@ This usually happens when:
 - So Git sees two different roots.
 
 **Cause**: Repositories have no common ancestor.  
-**Fix**: `git pull origin main --allow-unrelated-histories`.or `git merge --allow-unrelated-histories`.
-**Note**: If you have already pushed to the remote repository, you can use `git pull origin main --allow-unrelated-histories` to pull the changes from the remote repository and merge them into your local repository.
+**Fix**: `git pull origin main --allow-unrelated-histories`.or `git merge --allow-unrelated-histories`.<br>
+**Note**: If you have already pushed to the remote repository, you can use `git pull origin main --allow-unrelated-histories` to pull the changes from the remote repository and merge them into your local repository.<br>
 **Note**: If you want to keep your local changes, you can use `git merge --no-commit --allow-unrelated-histories` to merge the changes from the remote repository into your local repository without committing them.
 
 
