@@ -13,8 +13,18 @@
 **Fix**: `git stash` → `git pull` → `git stash pop`.
 
 ## 4. fatal: refusing to merge unrelated histories
+**definition**:It happens when your local repository and the GitHub repository started independently.
+This usually happens when:
+- You ran git init locally and committed
+- You also created the repo on GitHub with README / LICENSE
+- Both histories started separately
+- So Git sees two different roots.
+
 **Cause**: Repositories have no common ancestor.  
-**Fix**: `git pull origin main --allow-unrelated-histories`.
+**Fix**: `git pull origin main --allow-unrelated-histories`.or `git merge --allow-unrelated-histories`.
+**Note**: If you have already pushed to the remote repository, you can use `git pull origin main --allow-unrelated-histories` to pull the changes from the remote repository and merge them into your local repository.
+**Note**: If you want to keep your local changes, you can use `git merge --no-commit --allow-unrelated-histories` to merge the changes from the remote repository into your local repository without committing them.
+
 
 ## 5. error: pathspec did not match any file(s) known to git
 **Cause**: File/path doesn’t exist in index.  
@@ -33,8 +43,17 @@
 **Fix**: `git remote set-url origin <new-url>` or remove first.
 
 ## 9. error: cannot lock ref
+**definition**:It happens when you have multiple Git processes running at the same time.
+This usually happens when one of these occurred during rebase:
+- Another Git command modified main.
+- You ran `git rebase` on main.
+- The rebase state got partially interrupted.
+- Windows file locking / index glitch.
+- VS Code or another tool touched Git refs.
+
+
 **Cause**: Concurrent access or permission issue.  
-**Fix**: Remove `.git/refs/.../lock` file manually.
+**Fix**: Remove `.git/refs/.../lock` file manually.or `git rebase --abort` and try again.
 
 ## 10. error: object file is empty
 **Cause**: Corrupted object database.  
@@ -79,3 +98,23 @@
 ## 20. error: remote upstream already exists
 **Cause**: Second `git remote add upstream` attempt.  
 **Fix**: `git remote remove upstream` then add again.
+
+## 21. fatal: invalid refspec 'HEAD'
+**definition**:This usually happens when you are not on a normal branch or when HEAD is detached or in a broken state after rebase/merge attempts.
+A refspec must look like one of these:
+- local-branch
+- local-branch:remote-branch
+- HEAD:remote-branch
+
+**Cause**: Invalid refspec passed to `git reset`.
+**Fix**: `git reset --hard HEAD@{1}` or `git reset --hard HEAD~1`.or `git checkout <branch>` then `git reset --hard`.
+
+## 22. non-fast-forward
+**definition**:This usually happens when you are not on a normal branch or when HEAD is detached or in a broken state after rebase/merge attempts.
+A refspec must look like one of these:HEAD -> main (non-fast-forward) → you pushed from HEAD ,main -> main (non-fast-forward) → you pushed from branch 
+- local-branch
+- local-branch:remote-branch
+- HEAD:remote-branch
+
+**Cause**: Local branch is behind remote.
+**Fix**: `git pull --rebase` then `git push`(pull first, then push).
