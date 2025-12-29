@@ -1,4 +1,4 @@
-## Common Git Errors
+# Common Git Errors
 
 ## 1. error: failed to push some refs to
 **Cause**: Local branch is behind remote.  
