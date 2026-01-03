@@ -113,7 +113,7 @@ A refspec must look like one of these:
 **definition**:This usually happens when you are not on a normal branch or when HEAD is detached or in a broken state after rebase/merge attempts.
 A refspec must look like one of these:HEAD -> main (non-fast-forward) → you pushed from HEAD ,main -> main (non-fast-forward) → you pushed from branch 
 - local-branch
-- local-branch:remote-branch
+- local-branch:remote-branch(eg., `git push thisisremotebranch hereisdirectorybranch:main` when we reaname branches. ) 
 - HEAD:remote-branch
 
 **Cause**: Local branch is behind remote.
